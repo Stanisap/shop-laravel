@@ -18,12 +18,12 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="http://internet-shop.tmweb.ru">Интернет Магазин</a>
+            <a class="navbar-brand" href="/">Интернет Магазин</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li ><a href="http://internet-shop.tmweb.ru">Все товары</a></li>
-                <li ><a href="http://internet-shop.tmweb.ru/categories">Категории</a>
+                <li ><a href="/">Все товары</a></li>
+                <li ><a href="/categories">Категории</a>
                 </li>
                 <li ><a href="http://internet-shop.tmweb.ru/basket">В корзину</a></li>
                 <li><a href="http://internet-shop.tmweb.ru/reset">Сбросить проект в начальное состояние</a></li>
@@ -51,6 +51,7 @@
     <div class="starter-template">
         <h1>iPhone X 64GB</h1>
         <h2>Мобильные телефоны</h2>
+        <h2>{{ $product }}</h2>
         <p>Цена: <b>71990 ₽</b></p>
         <img src="http://internet-shop.tmweb.ru/storage/products/iphone_x.jpg">
         <p>Отличный продвинутый телефон с памятью на 64 gb</p>
