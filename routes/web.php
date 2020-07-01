@@ -13,14 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'MainController@index');
+Route::get('/', 'MainController@index')->name('index');
 
-Route::get('/categories', 'MainController@categories');
+Route::get('/categories', 'MainController@categories')->name('categories');
 
-Route::get('/categories', 'MainController@categories');
+Route::get('/{category}', 'MainController@category')->name('category');
 
-Route::get('/{category}', 'MainController@category');
+Route::get('/{category}/{product?}', 'MainController@product')->name('product');
 
+Route::post('/basket', 'MainController@basket')->name('basket');
 
-Route::get('/{category}/{product?}', 'MainController@product');
+Route::post('/basket/order', 'MainController@basketPlace')->name('basket-place');
 
