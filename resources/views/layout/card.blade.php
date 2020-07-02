@@ -8,15 +8,12 @@
             <p>{{ $product->price }}</p>
             <p>
             {{ $product->category->name }}
-            <form action="{{ route('basket') }}" method="POST">
+            <form action="{{ route('basket-add', $product) }}" method="POST">
                 <button type="submit" class="btn btn-primary" role="button">В корзину</button>
                 <a href="{{ route('product', [$product->category->code, $product->code]) }}"
                    class="btn btn-default"
                    role="button">Подробнее</a>
-{{--                <a href="/mobiles/iphone_x_64"--}}
-{{--                   class="btn btn-default"--}}
-{{--                   role="button">Подробнее</a>--}}
-                <input type="hidden" name="_token" value="vP5klWuAvq25PY3PwasN8XCqUvd1aNErQEocGRDB">
+                @csrf
             </form>
             </p>
         </div>

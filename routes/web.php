@@ -17,11 +17,15 @@ Route::get('/', 'MainController@index')->name('index');
 
 Route::get('/categories', 'MainController@categories')->name('categories');
 
+Route::get('/basket', 'BasketController@basket')->name('basket');
+
+Route::post('/basket/add/{id}', 'BasketController@basketAdd')->name('basket-add');
+
+Route::get('/basket/order', 'BasketController@basketPlace')->name('basket-place');
+
 Route::get('/{category}', 'MainController@category')->name('category');
 
 Route::get('/{category}/{product?}', 'MainController@product')->name('product');
 
-Route::post('/basket', 'MainController@basket')->name('basket');
 
-Route::post('/basket/order', 'MainController@basketPlace')->name('basket-place');
 

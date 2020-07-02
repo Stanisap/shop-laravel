@@ -48,26 +48,8 @@ class MainController extends Controller
      */
     public function product($category, $product = null)
     {
-        return view('product', [
-            'category' => $category,
-            'product' => $product,
-        ]);
-    }
-
-    /**
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function basket()
-    {
-        return view('basket');
-    }
-
-    /**
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function basketPlace()
-    {
-        return view('order');
+        $product = Product::where('code', $product)->first();
+        return view('product', compact('product'));
     }
 
 }
