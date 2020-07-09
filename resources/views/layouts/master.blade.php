@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -23,14 +22,17 @@
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="{{ route('index') }}">Все товары</a></li>
-                <li ><a href="{{ route('categories') }}">Категории</a>
+                <li><a href="{{ route('categories') }}">Категории</a>
                 </li>
-                <li ><a href="{{ route('basket') }}">В корзину</a></li>
+                @if(!is_null(session('orderId')))
+                    <li><a href="{{ route('basket') }}">В корзину</a></li>
+                @endif
                 <li><a href="{{ route('index') }}">Сбросить проект в начальное состояние</a></li>
                 <li><a href="http://internet-shop.tmweb.ru/locale/en">en</a></li>
 
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">₽<span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">₽<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="http://internet-shop.tmweb.ru/currency/RUB">₽</a></li>
                         <li><a href="http://internet-shop.tmweb.ru/currency/USD">$</a></li>
@@ -40,15 +42,28 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="http://internet-shop.tmweb.ru/login">Войти</a></li>
-
+                @guest
+                    <li><a href="{{ route('login') }}">Войти</a></li>
+                    <li><a href="{{ route('register') }}">Зарегестрироваться</a></li>
+                @endguest
+                @auth
+                    <li><a href="{{ route('home') }}">Панель администраторо</a></li>
+                    <li><a href="{{ route('get-logout') }}">Выйти</a></li>
+                @endauth
             </ul>
         </div>
     </div>
 </nav>
 
 <div class="container">
-    @yield('content')
+    <div class="starter-template">
+        @if(session()->has('success'))
+            <p class="alert alert-success">{{ session()->get('success') }}</p>
+        @elseif(session()->has('warning'))
+            <p class="alert alert-warning">{{ session()->get('warning') }}</p>
+        @endif
+        @yield('content')
+    </div>
 </div>
 </body>
 </html>
