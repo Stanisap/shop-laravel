@@ -4,8 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 class Product extends Model
 {
+
+    protected $fillable = [
+        'name', 'code', 'description', 'category_id', 'image'
+    ];
+
 //    эта функция перегружает контролер, но она работает
 //    public function getCategory()
 //    {
