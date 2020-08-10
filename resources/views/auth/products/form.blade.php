@@ -51,7 +51,7 @@
                 </div>
                 <br>
                 <div class="input-group row">
-                    <label for="description" class="col-sm-2 col-form-label">Категория: </label>
+                    <label for="category_id" class="col-sm-2 col-form-label">Категория: </label>
                     <div class="col-sm-6">
                         <select name="category_id" id="category_id" class="form-control">
                             @foreach($categories as $category)
@@ -63,6 +63,14 @@
                                 @endisset
                             @endforeach
                         </select>
+                    </div>
+                </div>
+                <br>
+                <div class="input-group row">
+                    <label for="price" class="col-sm-2 col-form-label">Цена: </label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" name="price" id="price"
+                               value="@isset($product){{ $product->price }}@endisset">
                     </div>
                 </div>
                 <br>

@@ -32,6 +32,10 @@
                 <td>{{ $product->description }}</td>
             </tr>
             <tr>
+                <td>Цена</td>
+                <td>{{ $product->price }}</td>
+            </tr>
+            <tr>
                 <td>Картинка</td>
                 <td><img src="http://laravel-diplom-1.rdavydov.ru/storage/categories/appliance.jpg"
                          height="240px"></td>

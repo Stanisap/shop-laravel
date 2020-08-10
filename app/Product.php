@@ -9,14 +9,8 @@ class Product extends Model
 {
 
     protected $fillable = [
-        'name', 'code', 'description', 'category_id', 'image'
+        'name', 'code', 'price', 'description', 'category_id', 'image'
     ];
-
-//    эта функция перегружает контролер, но она работает
-//    public function getCategory()
-//    {
-//        return $category = Category::find($this->category_id);
-//    }
 
     public function category()
     {
