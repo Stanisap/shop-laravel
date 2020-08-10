@@ -6,7 +6,7 @@
     <div class="panel">
         @foreach($categories as $category)
             <a href="{{ route('category', $category->code) }}">
-                <img src="http://internet-shop.tmweb.ru/storage/categories/mobile.jpg">
+                <img src="{{ Storage::url($category->image) }} " width="60">
                 <h2>{{ $category->name }}</h2>
             </a>
             <p>
