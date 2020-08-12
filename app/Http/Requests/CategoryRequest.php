@@ -23,11 +23,17 @@ class CategoryRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'code' => 'required|min:3|max:255',
+        $rules = [
+            'code' => 'required|min:3|max:255|unique:categories,code',
             'name' => 'required|min:3|max:255',
             'description' => 'required|min:3',
         ];
+
+        if ($this->route()->named('categories.update')) {
+            $rules['code'] .= ',' . $this->route()->parameter('category')->id;
+        }
+
+        return $rules;
     }
 
     /**
@@ -43,6 +49,7 @@ class CategoryRequest extends FormRequest
             'code.min' => 'Поле "код" должно иметь :min символов',
             'name.min' => 'Поле "название" должно иметь :min символов',
             'description.min' => 'Поле "описание" должно иметь :min символов',
+            'unique' => 'Такой код уже существует. Поле должно быть уникальным',
         ];
     }
 

@@ -4,15 +4,20 @@ namespace App\Http\Controllers\Admin;
 
 use App\Category;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\CategoryRequest;
+use Exception as ExceptionAlias;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\View\View;
 
 class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function index()
     {
@@ -23,7 +28,7 @@ class CategoryController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Application|Factory|View
      */
     public function create()
     {
@@ -33,15 +38,17 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @param CategoryRequest $request
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-
-        $path = $request->file('image')->store('categories');
         $params = $request->all();
-        $params['image'] = $path;
+        unset($params['image']);
+        if ($request->has('image')) {
+            $path = $request->file('image')->store('categories');
+            $params['image'] = $path;
+        }
         Category::create($params);
         return redirect()->route('categories.index');
     }
@@ -49,8 +56,8 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Category  $category
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @param Category $category
+     * @return Application|Factory|View
      */
     public function show(Category $category)
     {
@@ -60,8 +67,8 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Category  $category
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @param Category $category
+     * @return Application|Factory|View
      */
     public function edit(Category $category)
     {
@@ -71,16 +78,19 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Category  $category
-     * @return \Illuminate\Http\RedirectResponse
+     * @param CategoryRequest $request
+     * @param Category $category
+     * @return RedirectResponse
      */
-    public function update(Request $request, Category $category)
+    public function update(CategoryRequest $request, Category $category)
     {
-        Storage::delete($category->image);
-        $path = $request->file('image')->store('categories');
         $params = $request->all();
-        $params['image'] = $path;
+        unset($params['image']);
+        if ($request->has('image')) {
+            Storage::delete($category->image);
+            $path = $request->file('image')->store('categories');
+            $params['image'] = $path;
+        }
         $category->update($params);
         return redirect()->route('categories.index');
     }
@@ -88,8 +98,9 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Category  $category
-     * @return \Illuminate\Http\RedirectResponse
+     * @param Category $category
+     * @return RedirectResponse
+     * @throws ExceptionAlias
      */
     public function destroy(Category $category)
     {

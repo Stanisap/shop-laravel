@@ -18,6 +18,9 @@
                     Название
                 </th>
                 <th>
+                    Изображение
+                </th>
+                <th style="text-align: center">
                     Действия
                 </th>
             </tr>
@@ -27,6 +30,11 @@
                     <td>{{ $category->code }}</td>
                     <td>{{ $category->name }}</td>
                     <td>
+                        @isset($category->image)
+                        <img src="{{ Storage::url($category->image) }}" width="50">
+                        @endisset
+                    </td>
+                    <td style="text-align: center">
                         <div class="btn-group" role="group">
                             <form action="{{ route('categories.destroy', $category) }}" method="POST">
                                 <a class="btn btn-success" type="button" href="{{ route('categories.show', $category) }}">Открыть</a>

@@ -18,6 +18,9 @@
                     Название
                 </th>
                 <th>
+                    Название
+                </th>
+                <th style="text-align: center">
                     Действия
                 </th>
             </tr>
@@ -27,6 +30,11 @@
                     <td>{{ $product->code }}</td>
                     <td>{{ $product->name }}</td>
                     <td>
+                        @isset($product->image)
+                            <img src="{{ Storage::url($product->image) }}" width="50">
+                        @endisset
+                    </td>
+                    <td style="text-align: center">
                         <div class="btn-group" role="group">
                             <form action="{{ route('products.destroy', $product) }}" method="POST">
                                 <a class="btn btn-success" type="button" href="{{ route('products.show', $product) }}">Открыть</a>
