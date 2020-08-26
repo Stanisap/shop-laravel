@@ -42,7 +42,12 @@ return [
     */
 
     'disks' => [
-
+        // create a storage for reset options by the applications
+        'reset' => [
+            'driver' => 'local',
+            'root' => base_path('resources/images'),
+        ],
+        // create a storage for loading images on the application
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),
