@@ -1,26 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Person;
 
 use App\Http\Controllers\Controller;
 use App\Order;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class OrderController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-//    public function __construct()
-//    {
-//        $this->middleware('auth');
-//    }
-
     /**
      * Show the application orders.
      *
@@ -28,17 +20,21 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::where('status', 1)->get();
+        $orders = Auth::user()->orders()->where('status', 1)->get();
         return view('auth.orders.index', compact('orders'));
     }
 
     /**
      * Shows the application order
      * @param Order $order
-     * @return Application|Factory|View
+     * @return Application|Factory|RedirectResponse|View
      */
     public function show(Order $order)
     {
-        return view('auth.orders.show', compact('order'));
+        if (Auth::user()->orders->contains($order)) {
+            return view('auth.orders.show', compact('order'));
+        }
+        return back();
+
     }
 }

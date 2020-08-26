@@ -12,6 +12,7 @@
     <script src="/js/bootstrap.min.js"></script>
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/starter-template.css" rel="stylesheet">
+
 </head>
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -21,12 +22,10 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="{{ route('index') }}">Все товары</a></li>
-                <li><a href="{{ route('categories') }}">Категории</a>
+                <li @routeactive('index')><a href="{{ route('index') }}">Все товары</a></li>
+                <li @routeactive('categor*')><a href="{{ route('categories') }}">Категории</a>
                 </li>
-                @if(!is_null(session('orderId')))
-                    <li><a href="{{ route('basket') }}">В корзину</a></li>
-                @endif
+                <li @routeactive('basket*')><a href="{{ route('basket') }}">В корзину</a></li>
                 <li><a href="{{ route('index') }}">Сбросить проект в начальное состояние</a></li>
                 <li><a href="http://internet-shop.tmweb.ru/locale/en">en</a></li>
 
@@ -44,10 +43,14 @@
             <ul class="nav navbar-nav navbar-right">
                 @guest
                     <li><a href="{{ route('login') }}">Войти</a></li>
-                    <li><a href="{{ route('register') }}">Зарегестрироваться</a></li>
+{{--                    <li><a href="{{ route('register') }}">Зарегистрироваться</a></li>--}}
                 @endguest
                 @auth
-                    <li><a href="{{ route('home') }}">Панель администраторо</a></li>
+                    @admin
+                        <li><a href="{{ route('home') }}">Панель администратора</a></li>
+                    @else
+                        <li><a href="{{ route('person.orders.index') }}">Мои заказы</a></li>
+                    @endadmin
                     <li><a href="{{ route('get-logout') }}">Выйти</a></li>
                 @endauth
             </ul>

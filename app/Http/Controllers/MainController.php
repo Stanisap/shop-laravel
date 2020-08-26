@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Product;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\View\View;
 
 /**
  * Class MainController
@@ -13,7 +16,7 @@ class MainController extends Controller
 {
     /**
      * The action for a main page of the site
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Application|Factory|View
      */
     public function index()
     {
@@ -22,7 +25,7 @@ class MainController extends Controller
     }
 
     /**
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Application|Factory|View
      */
     public function categories()
     {
@@ -32,7 +35,7 @@ class MainController extends Controller
 
     /**
      * @param $code
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Application|Factory|View
      */
     public function category($code)
     {
@@ -44,7 +47,7 @@ class MainController extends Controller
     /**
      * @param $category
      * @param null $product
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Application|Factory|View
      */
     public function product($category, $product = null)
     {
