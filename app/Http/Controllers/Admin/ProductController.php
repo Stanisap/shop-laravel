@@ -23,7 +23,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::get();
-        return view('auth.products.index', compact('products')) ;
+        return view('auth.products.index', compact('products'));
     }
 
     /**
@@ -50,6 +50,13 @@ class ProductController extends Controller
         if ($request->has('image')) {
             $path = $request->file('image')->store('products');
             $params['image'] = $path;
+        }
+        // If the fields are not selected,
+        // then we assign zero to them so that they can be displayed in the product model
+        foreach (['hit', 'new', 'recommend'] as $fieldName) {
+            if (!isset($params[$fieldName])) {
+                $params[$fieldName] = 0;
+            }
         }
         Product::create($params);
         return redirect()->route('products.index');
@@ -88,12 +95,20 @@ class ProductController extends Controller
     public function update(ProductRequest $request, Product $product)
     {
         $params = $request->all();
+
         unset($params['image']);
         if ($file = $request->file('image')) {
             Storage::delete($product->image);
             $path = $file->store('products');
             $params['image'] = $path;
         }
+
+        foreach (['hit', 'new', 'recommend'] as $fieldName) {
+            if (!isset($params[$fieldName])) {
+                $params[$fieldName] = 0;
+            }
+        }
+
         $product->update($params);
         return redirect()->route('products.index');
     }

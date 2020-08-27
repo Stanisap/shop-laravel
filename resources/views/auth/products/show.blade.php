@@ -48,6 +48,15 @@
                 <td>Кол-во товаров</td>
                 <td>10</td>
             </tr>
+            <tr>
+                <td>Лейблы</td>
+                <td>
+                    @if($product->isNew())<span class="badge">Новинка</span>@endif
+                    @if($product->isHit())<span class="badge">Хит продаж</span>@endif
+                    @if($product->isRecommend())<span class="badge">Рекомендуемые</span>@endif
+                </td>
+
+            </tr>
             </tbody>
         </table>
     </div>
