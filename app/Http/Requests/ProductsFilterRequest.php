@@ -25,8 +25,8 @@ class ProductsFilterRequest extends FormRequest
     {
         //dd($this->request->all());
         return [
-            'price_from' => 'numeric',
-            'price_to' => 'numeric',
+            'price_from' => 'nullable|numeric|min:0',
+            'price_to' => 'nullable|numeric|min:0',
         ];
     }
 }

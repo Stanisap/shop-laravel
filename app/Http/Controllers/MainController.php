@@ -59,7 +59,6 @@ class MainController extends Controller
         $category = Category::where('code', $code)->first();
 
         $productQuery = $category->products()->with('category');
-        //dd($request->all());
         if ($request->filled('price_from')) {
             $productQuery->where('price', '>=', $request->price_from);
         }
@@ -74,7 +73,7 @@ class MainController extends Controller
 
         $products = $productQuery->paginate(3);
 
-        return view('category', compact('category', 'products'));
+        return view('category', compact('products'));
     }
 
     /**
