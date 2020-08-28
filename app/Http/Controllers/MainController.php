@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Http\Requests\ProductsFilterRequest;
 use App\Product;
-
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\View\View;
@@ -23,7 +22,7 @@ class MainController extends Controller
      */
     public function index(ProductsFilterRequest $request)
     {
-        $productQuery = Product::query();
+        $productQuery = Product::with('category');
 
         if ($request->filled('price_from')) {
             $productQuery->where('price', '>=', $request->price_from);
@@ -59,7 +58,7 @@ class MainController extends Controller
     {
         $category = Category::where('code', $code)->first();
 
-        $productQuery = $category->products()->getQuery();
+        $productQuery = $category->products()->with('category');
         //dd($request->all());
         if ($request->filled('price_from')) {
             $productQuery->where('price', '>=', $request->price_from);
