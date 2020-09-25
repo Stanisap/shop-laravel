@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Person;
 
 use App\Http\Controllers\Controller;
-use App\Order;
+use App\Models\Order;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Contracts\View\Factory;
@@ -20,7 +20,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Auth::user()->orders()->where('status', 1)->get();
+        $orders = Auth::user()->orders()->active()->paginate(10);
+
         return view('auth.orders.index', compact('orders'));
     }
 

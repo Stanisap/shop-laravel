@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
 use App\Http\Requests\ProductsFilterRequest;
-use App\Product;
+use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\View\View;
@@ -32,7 +32,7 @@ class MainController extends Controller
         }
         foreach (['hit', 'new', 'recommend'] as $field) {
             if ($request->has($field)) {
-                $productQuery->where($field, 1);
+                $productQuery->$field();
             }
         }
 
@@ -71,9 +71,9 @@ class MainController extends Controller
             }
         }
 
-        $products = $productQuery->paginate(3);
+        $products = $productQuery->paginate(6);
 
-        return view('category', compact('products'));
+        return view('category', compact('products', 'category'));
     }
 
     /**

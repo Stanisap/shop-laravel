@@ -13,7 +13,7 @@ class ResetController extends Controller
         Artisan::call('migrate:fresh --seed');
 
         foreach (['categories',  'products'] as $folder) {
-            // deletes an ald folder in /storage/app/public/categories|products
+            // deletes an old folder in /storage/app/public/categories|products
             Storage::deleteDirectory($folder);
             // creates a new folder in /storage/app/public/categories|products
             Storage::makeDirectory($folder);

@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -23,6 +23,23 @@ class Product extends Model
         } else {
             return $this->price;
         }
+    }
+
+    // Methods scopes
+
+    public function scopeHit($query)
+    {
+        return $query->where('hit', 1);
+    }
+
+    public function scopeNew($query)
+    {
+        return $query->where('new', 1);
+    }
+
+    public function scopeRecommend($query)
+    {
+        return $query->where('recommend', 1);
     }
 
     // Methods mutators

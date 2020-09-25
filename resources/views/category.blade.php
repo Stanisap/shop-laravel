@@ -1,14 +1,14 @@
 @extends('layouts.master')
-@section('title', $products->first()->category->name)
+@section('title', $category->name)
 
 @section('content')
     <h1>
-        {{ $products->first()->category->name }} {{ $products->first()->category->products->count() }}
+        {{ $category->name }} {{ $products->count() }}
     </h1>
     <p>
-        {{ $products->first()->category->description }}
+        {{ $category->description }}
     </p>
-    <form method="GET" action="{{ route('category', $products->first()->category->code) }}">
+    <form method="GET" action="{{ route('category', $category->code) }}">
         <div class="filters row">
             <div class="col-sm-6 col-md-3">
                 <label for="price_from"> Цена от
@@ -35,7 +35,7 @@
             </div>
             <div class="col-sm-6 col-md-3">
                 <button type="submit" class="btn btn-primary">Фильтр</button>
-                <a href="{{ route('category', $products->first()->category->code) }}" class="btn btn-warning">Сброс</a>
+                <a href="{{ route('category', $category->code) }}" class="btn btn-warning">Сброс</a>
             </div>
         </div>
     </form>

@@ -45,7 +45,7 @@
             <ul class="nav navbar-nav navbar-right">
                 @guest
                     <li><a href="{{ route('login') }}">Войти</a></li>
-{{--                    <li><a href="{{ route('register') }}">Зарегистрироваться</a></li>--}}
+                    <li><a href="{{ route('register') }}">Зарегистрироваться</a></li>
                 @endguest
                 @auth
                     @admin
