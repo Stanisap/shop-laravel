@@ -3,12 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 class Product extends Model
 {
+    use SoftDeletes;
+
     protected $fillable = [
-        'name', 'code', 'price', 'description', 'category_id', 'image', 'new', 'hit', 'recommend',
+        'name', 'code', 'price', 'description', 'category_id', 'image', 'new', 'hit', 'recommend', 'count',
     ];
 
     public function category()
@@ -26,6 +29,11 @@ class Product extends Model
     }
 
     // Methods scopes
+
+    public function scopeByCode($query, $code)
+    {
+        return $query->where('code', $code);
+    }
 
     public function scopeHit($query)
     {
@@ -72,5 +80,10 @@ class Product extends Model
     public function isRecommend()
     {
         return $this->recommend === 1;
+    }
+
+    public function isAvailable()
+    {
+        return !$this->trashed() && $this->count > 0;
     }
 }

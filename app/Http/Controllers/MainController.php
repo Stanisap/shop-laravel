@@ -81,9 +81,9 @@ class MainController extends Controller
      * @param null $product
      * @return Application|Factory|View
      */
-    public function product($category, $product = null)
+    public function product($category, $productCode)
     {
-        $product = Product::where('code', $product)->first();
+        $product = Product::withTrashed()->byCode($productCode)->first();
         return view('product', compact('product'));
     }
 

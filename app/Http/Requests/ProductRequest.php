@@ -28,6 +28,7 @@ class ProductRequest extends FormRequest
             'name' => 'required|min:3|max:255',
             'description' => 'required|min:3',
             'price' => 'required|numeric|min:2',
+            'count' => 'required|numeric|min:0',
         ];
 
         if ($this->route()->named('products.update')) {
@@ -53,6 +54,7 @@ class ProductRequest extends FormRequest
             'price.min' => 'Поле "описание" должно иметь :min символов',
             'price.numeric' => 'В это поле нужно вводить цыфры',
             'unique' => 'Такой код уже существует. Поле должно быть уникальным',
+            'count.numeric' => 'В этом поле нужно вводить цыфры',
 
         ];
     }

@@ -18,7 +18,10 @@
                     Название
                 </th>
                 <th>
-                    Название
+                    Кол.
+                </th>
+                <th>
+                    Товар
                 </th>
                 <th style="text-align: center">
                     Действия
@@ -29,6 +32,7 @@
                     <td>{{ $product->id }}</td>
                     <td>{{ $product->code }}</td>
                     <td>{{ $product->name }}</td>
+                    <td>{{ $product->count }}</td>
                     <td>
                         @isset($product->image)
                             <img src="{{ Storage::url($product->image) }}" width="50">
