@@ -4,10 +4,11 @@
 namespace App\Classes;
 
 
+use App\Mail\OrderCreated;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
-use function GuzzleHttp\Psr7\_parse_request_uri;
+use Illuminate\Support\Facades\Mail;
 
 class Basket
 {
@@ -42,22 +43,29 @@ class Basket
         return $this->order;
     }
 
-    public function countAvailable()
+    public function countAvailable($updateCount = false)
     {
         foreach ($this->order->products as $productOrder) {
             if ($productOrder->count < $this->getPivotRow($productOrder)->count) {
                 return false;
             }
+            if ($updateCount) {
+                $productOrder->count -= $this->getPivotRow($productOrder)->count;
+            }
+        }
+        if ($updateCount) {
+            $this->order->products->map->save();
         }
         return true;
     }
 
 
-    public function saveOrder($name, $phone)
+    public function saveOrder($name, $phone, $email)
     {
-        if (!$this->countAvailable()) {
+        if (!$this->countAvailable(true)) {
             return false;
         }
+        Mail::to($email)->send(new OrderCreated($name, $this->getOrder()));
         return $this->order->saveOrder($name, $phone);
     }
 
@@ -83,7 +91,6 @@ class Basket
 
     public function addProduct(Product $product)
     {
-
         if ($this->order->products->contains($product->id)) {
             $pivotRow = $this->getPivotRow($product);
             $pivotRow->count++;

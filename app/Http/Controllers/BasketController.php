@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
@@ -24,7 +25,7 @@ class BasketController extends Controller
     }
 
     /**
-     * @return Application|Factory|View
+     * @return Application|Factory|RedirectResponse|View
      */
     public function basketPlace()
     {
@@ -39,7 +40,8 @@ class BasketController extends Controller
 
     public function orderConfirm(Request $request)
     {
-        if ((new Basket())->saveOrder($request->name, $request->phone)) {
+        $email = (Auth::check()) ? Auth::user()->email : $request->email;
+        if ((new Basket())->saveOrder($request->name, $request->phone, $email)) {
             session()->flash('success', 'Ваш заказ принят в обработку!');
         } else {
             session()->flash('warning', 'Товар не доступен в полном объеме');
@@ -51,6 +53,7 @@ class BasketController extends Controller
     public function basketAdd(Product $product)
     {
         $result = (new Basket(true))->addProduct($product);
+
         if ($result) {
             session()->flash('success', 'Добавлен товар ' . $product->name);
         } else {
