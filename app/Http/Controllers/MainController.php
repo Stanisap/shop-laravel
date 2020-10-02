@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductsFilterRequest;
+use App\Http\Requests\SubscriptionRequest;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Subscription;
+use Illuminate\Http\Request;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\View\View;
@@ -78,13 +81,23 @@ class MainController extends Controller
 
     /**
      * @param $category
-     * @param null $product
+     * @param $productCode
      * @return Application|Factory|View
      */
     public function product($category, $productCode)
     {
         $product = Product::withTrashed()->byCode($productCode)->firstOrFail();
         return view('product', compact('product'));
+    }
+
+    public function subscribe(SubscriptionRequest $request, Product $product)
+    {
+        Subscription::create([
+            'email' => $request->email,
+            'product_id' => $product->id,
+        ]);
+
+        return redirect()->back()->with('success', "Спасибо мы свяжемся с Вами при поступлении $product->name");
     }
 
 }
