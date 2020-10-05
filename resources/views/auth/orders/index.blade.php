@@ -1,10 +1,10 @@
 @extends('auth.layouts.master')
 
-@section('title', 'Заказы')
+@section('title', __('order.title_page'))
 
 @section('content')
     <div class="col-md-12">
-        <h1>Заказы</h1>
+        <h1>@lang('order.orders')</h1>
         <table class="table">
             <tbody>
             <tr>
@@ -12,19 +12,19 @@
                     #
                 </th>
                 <th>
-                    Имя
+                    @lang('order.user_name')
                 </th>
                 <th>
-                    Телефон
+                    @lang('order.user_phone')
                 </th>
                 <th>
-                    Когда отправлен
+                    @lang('order.create_at')
                 </th>
                 <th>
-                    Сумма
+                    @lang('order.sum')
                 </th>
                 <th>
-                    Действия
+                    @lang('order.action')
                 </th>
             </tr>
             @foreach($orders as $order)
@@ -43,7 +43,7 @@
                                @else
                                    {{ route('person.order.show', $order) }}
                                @endadmin
-                                   ">Открыть</a>
+                                   ">@lang('order.open')</a>
                         </div>
                     </td>
                 </tr>

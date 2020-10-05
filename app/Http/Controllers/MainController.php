@@ -10,6 +10,7 @@ use App\Models\Subscription;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Support\Facades\App;
 use Illuminate\View\View;
 
 /**
@@ -97,7 +98,19 @@ class MainController extends Controller
             'product_id' => $product->id,
         ]);
 
-        return redirect()->back()->with('success', "Спасибо мы свяжемся с Вами при поступлении $product->name");
+        return redirect()->back()->with('success', __('main.m_subscribe') . $product->name);
+    }
+
+    public function changeLocale($locale)
+    {
+        $availableLocale = ['ru', 'en'];
+        if (!in_array($locale, $availableLocale)) {
+            $locale = config('app.locale');
+        }
+        session(['locale' => $locale]);
+        App::setLocale($locale);
+
+        return redirect()->back();
     }
 
 }

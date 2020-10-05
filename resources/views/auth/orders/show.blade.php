@@ -1,22 +1,22 @@
 @extends('layouts.master')
 
-@section('title', 'заказ: ' . $order->id)
+@section('title', __('order.order_num') . $order->id)
 
 @section('content')
     <div class="py-4">
         <div class="container">
             <justify-content-center>
                 <div class="panel">
-                    <h1>Заказ № {{ $order->id }}</h1>
-                    <p>Заказчик <b>{{ $order->name }}</b></p>
-                    <p>Номер телефона: <b>{{$order->phone}}</b></p>
+                    <h1>@lang('order.order_num'){{ $order->id }}</h1>
+                    <p>@lang('order.user_name'): <b>{{ $order->name }}</b></p>
+                    <p>@lang('order.user_phone'): <b>{{$order->phone}}</b></p>
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th>Название</th>
-                            <th>Количество</th>
-                            <th>Цена</th>
-                            <th>Стоимость</th>
+                            <th>@lang('order.name')</th>
+                            <th>@lang('basket.quantity')</th>
+                            <th>@lang('basket.price')</th>
+                            <th>@lang('basket.total')</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -34,7 +34,7 @@
                             </tr>
                         @endforeach
                         <tr>
-                            <td colspan="3">Общая стоимость</td>
+                            <td colspan="3">@lang('basket.subtotal')</td>
                             <td>{{ $order->calculateFullSum() }} руб</td>
                         </tr>
 

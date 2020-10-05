@@ -14,13 +14,13 @@
                 {{ isset($category) ? $category->name : $product->category->name }}
                 <form action="{{ route('basket-add', $product) }}" method="POST">
                     @if($product->isAvailable())
-                    <button type="submit" class="btn btn-primary" role="button">В корзину</button>
+                    <button type="submit" class="btn btn-primary" role="button">@lang('main.to_cart')</button>
                     @else
-                        Товар не доступен
+                        @lang('main.product_not_available')
                     @endif
                     <a href="{{ route('product', [isset($category) ? $category->code : $product->category->code, $product->code]) }}"
                        class="btn btn-default"
-                       role="button">Подробнее</a>
+                       role="button">@lang('main.see_more')</a>
                     @csrf
                 </form>
             </p>

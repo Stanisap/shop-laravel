@@ -32,7 +32,7 @@ class BasketController extends Controller
         $basket = new Basket();
         $order = $basket->getOrder();
         if (!$basket->countAvailable()) {
-            session()->flash('warning', 'Товар не доступен в полном объеме');
+            session()->flash('warning', __('basket.messages.not_available'));
             return redirect()->route('basket');
         }
         return view('order', compact('order'));
@@ -42,9 +42,9 @@ class BasketController extends Controller
     {
         $email = (Auth::check()) ? Auth::user()->email : $request->email;
         if ((new Basket())->saveOrder($request->name, $request->phone, $email)) {
-            session()->flash('success', 'Ваш заказ принят в обработку!');
+            session()->flash('success', __('basket.messages.confirmed_order'));
         } else {
-            session()->flash('warning', 'Товар не доступен в полном объеме');
+            session()->flash('warning', __('basket.messages.not_available'));
         }
         Order::eraseOrderSum();
         return redirect()->route('index');
@@ -55,9 +55,9 @@ class BasketController extends Controller
         $result = (new Basket(true))->addProduct($product);
 
         if ($result) {
-            session()->flash('success', 'Добавлен товар ' . $product->name);
+            session()->flash('success', $product->name . __('basket.messages.item_added'));
         } else {
-            session()->flash('warning', 'Товар ' . $product->name . ' в большем кол-ве не доступен');
+            session()->flash('warning', $product->name . __('basket.messages.this_not_available'));
         }
 
         return redirect()->route('basket');
@@ -66,7 +66,7 @@ class BasketController extends Controller
     public function basketRemove(Product $product)
     {
         (new Basket())->removeProduct($product);
-        session()->flash('warning', 'Удален товар ' . $product->name);
+        session()->flash('warning', $product->name . __('basket.messages.item_deleted'));
         return redirect()->route('basket');
     }
 }

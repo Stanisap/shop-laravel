@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Интернет Магазин: @yield('title')</title>
+    <title>@lang('main.online_shop'): @yield('title')</title>
 
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
     <script src="/js/jquery.min.js"></script>
@@ -18,18 +18,18 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="{{ route('index') }}">Интернет Магазин</a>
+            <a class="navbar-brand" href="{{ route('index') }}">@lang('main.online_shop')</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li @routeactive('index')><a href="{{ route('index') }}">Все товары</a></li>
-                <li @routeactive('categor*')><a href="{{ route('categories') }}">Категории</a>
+                <li @routeactive('index')><a href="{{ route('index') }}">@lang('main.all_products')</a></li>
+                <li @routeactive('categor*')><a href="{{ route('categories') }}">@lang('main.all_categories')</a>
                 </li>
-                <li @routeactive('basket*')><a href="{{ route('basket') }}">В корзину</a></li>
+                <li @routeactive('basket*')><a href="{{ route('basket') }}">@lang('main.cart')</a></li>
                 @admin
-                    <li><a href="{{ route('reset') }}">Сбросить проект в начальное состояние</a></li>
+                    <li><a href="{{ route('reset') }}">@lang('main.rest')</a></li>
                 @endadmin
-                <li><a href="http://internet-shop.tmweb.ru/locale/en">en</a></li>
+                <li><a href="{{ route('locale', __('main.set_lang')) }}">@lang('main.set_lang')</a></li>
 
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
@@ -44,16 +44,16 @@
 
             <ul class="nav navbar-nav navbar-right">
                 @guest
-                    <li><a href="{{ route('login') }}">Войти</a></li>
-                    <li><a href="{{ route('register') }}">Зарегистрироваться</a></li>
+                    <li><a href="{{ route('login') }}">@lang('main.sign_in')</a></li>
+                    <li><a href="{{ route('register') }}">@lang('main.register')</a></li>
                 @endguest
                 @auth
                     @admin
-                        <li><a href="{{ route('home') }}">Панель администратора</a></li>
+                        <li><a href="{{ route('home') }}">@lang('main.admin_panel')</a></li>
                     @else
-                        <li><a href="{{ route('person.orders.index') }}">Мои заказы</a></li>
+                        <li><a href="{{ route('person.orders.index') }}">@lang('main.orders')</a></li>
                     @endadmin
-                    <li><a href="{{ route('get-logout') }}">Выйти</a></li>
+                    <li><a href="{{ route('get-logout') }}">@lang('main.sign_out')</a></li>
                 @endauth
             </ul>
         </div>

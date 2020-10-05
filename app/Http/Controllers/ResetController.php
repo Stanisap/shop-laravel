@@ -29,7 +29,7 @@ class ResetController extends Controller
             session()->forget('orderId');
             session()->forget('full_order_sum');
         }
-        session()->flash('success', 'Ваш проект зброшен до начальных настроек!');
+        session()->flash('success', __('main.m_reset'));
 
         return redirect()->route('index');
     }

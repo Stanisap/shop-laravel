@@ -4,16 +4,16 @@
 
 @section('content')
 
-    <h1>Корзина</h1>
-    <p>Оформление заказа</p>
+    <h1>@lang('basket.cart')</h1>
+    <p>@lang('basket.checkout')</p>
     <div class="panel">
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>Название</th>
-                <th>Кол-во</th>
-                <th>Цена</th>
-                <th>Стоимость</th>
+                <th>@lang('basket.name')</th>
+                <th>@lang('basket.quantity')</th>
+                <th>@lang('basket.price')</th>
+                <th>@lang('basket.total')</th>
             </tr>
             </thead>
             <tbody>
@@ -45,14 +45,14 @@
                 </tr>
             @endforeach
             <tr>
-                <td colspan="3">Общая стоимость:</td>
+                <td colspan="3">@lang('basket.subtotal'):</td>
                 <td>{{ $order->calculateFullSum() }} руб.</td>
             </tr>
             </tbody>
         </table>
         <br>
         <div class="btn-group pull-right" role="group">
-            <a type="button" class="btn btn-success" href="{{ route('basket-place') }}">Оформить заказ</a>
+            <a type="button" class="btn btn-success" href="{{ route('basket-place') }}">@lang('basket.confirm')</a>
         </div>
     </div>
 @endsection

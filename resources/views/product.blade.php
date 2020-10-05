@@ -9,13 +9,13 @@
     <p>{{ $product->description }}</p>
     @if($product->isAvailable())
         <form action="{{ route('basket-add', $product) }}" method="POST">
-            <button type="submit" class="btn btn-success" role="button">Добавить в корзину</button>
+            <button type="submit" class="btn btn-success" role="button">@lang('main.add_to_cart')</button>
             @csrf
         </form>
     @else
-        <span class="mb-3"><p class="h3 text-danger">Товар не доступен</p></span>
+        <span class="mb-3"><p class="h3 text-danger">@lang('main.product_not_available')</p></span>
         <div class="row justify-content-center">
-            <p>Сообщить мне, когда товар будет в наличии</p>
+            <p>@lang('main.tell_me_in_stock')</p>
             @if($errors->get('email'))
                 <div class="alert alert-danger">
                     {!! $errors->get('email')[0] !!}
@@ -25,8 +25,8 @@
             <form action="{{ route('subscription', $product) }}" method="POSt">
                 @csrf
                 <div class="col-mb-6 form-group">
-                    <input type="text" name="email" placeholder="Enter your email">
-                    <button type="submit" class="btn btn-sm btn-success">Подписаться</button>
+                    <input type="text" name="email" placeholder="@lang('main.enter_y_email')">
+                    <button type="submit" class="btn btn-sm btn-success">@lang('main.subscribe')</button>
                 </div>
 
             </form>
