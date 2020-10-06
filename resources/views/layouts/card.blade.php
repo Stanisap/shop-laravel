@@ -6,12 +6,12 @@
             @if($product->isRecommend())<span class="badge badge-danger">Рекомендуемые</span>@endif
         </div>
 
-        <img src="{{ Storage::url($product->image) }}" alt="{{ $product->name }}" >
+        <img src="{{ Storage::url($product->image) }}" alt="{{ $product->__('name') }}" >
         <div class="caption">
-            <h3>{{ $product->name }}</h3>
+            <h3>{{ $product->__('name') }}</h3>
             <p>{{ $product->price }} ₽</p>
             <p>
-                {{ isset($category) ? $category->name : $product->category->name }}
+                {{ isset($category) ? $category->__('name') : $product->category->__('name') }}
                 <form action="{{ route('basket-add', $product) }}" method="POST">
                     @if($product->isAvailable())
                     <button type="submit" class="btn btn-primary" role="button">@lang('main.to_cart')</button>

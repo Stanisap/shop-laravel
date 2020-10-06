@@ -5,6 +5,8 @@ return [
     'all_products' => 'All Products',
     'all_categories' => 'All Categories',
     'cart' => 'Your Cart',
+    'category' => 'Category - ',
+    'product' => 'Product - ',
     'rest' => 'Reset project to factory settings',
     'sign_in' => 'Sign in',
     'register' => 'Register',

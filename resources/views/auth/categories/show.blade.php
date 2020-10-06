@@ -32,9 +32,16 @@
                 <td>{{ $category->description }}</td>
             </tr>
             <tr>
+                <td>Название en</td>
+                <td>{{ $category->name_en }}</td>
+            </tr>
+            <tr>
+                <td>Описание_en</td>
+                <td>{{ $category->description_en }}</td>
+            </tr>
+            <tr>
                 <td>Картинка</td>
-                <td><img src="{{ Storage::url($category->image) }}"
-                         height="240px"></td>
+                <td><img src="{{ Storage::url($category->image) }}" height="60px"></td>
             </tr>
             <tr>
                 <td>Кол-во товаров</td>

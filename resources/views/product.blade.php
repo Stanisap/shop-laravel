@@ -1,12 +1,12 @@
 @extends('layouts.master')
 
-@section('title', 'Продукт')
+@section('title', __('main.product') . $product->__('name'))
 @section('content')
-    <h1>{{ $product->name }}</h1>
-    <h2>{{ $product->category->name }}</h2>
-    <p>Цена: <b>{{ $product->price }}</b></p>
-    <img src="{{ Storage::url($product->image) }}" width="200" alt="{{ $product->name }}">
-    <p>{{ $product->description }}</p>
+    <h1>{{ $product->__('name') }}</h1>
+    <h2>{{ $product->category->__('name') }}</h2>
+    <p>@lang('main.property.price'): <b>{{ $product->price }}</b></p>
+    <img src="{{ Storage::url($product->image) }}" width="200" alt="{{ $product->__('name') }}">
+    <p>{{ $product->__('description') }}</p>
     @if($product->isAvailable())
         <form action="{{ route('basket-add', $product) }}" method="POST">
             <button type="submit" class="btn btn-success" role="button">@lang('main.add_to_cart')</button>

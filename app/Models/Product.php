@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Translatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -9,9 +10,21 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Product extends Model
 {
     use SoftDeletes;
+    use Translatable;
 
     protected $fillable = [
-        'name', 'code', 'price', 'description', 'category_id', 'image', 'new', 'hit', 'recommend', 'count',
+        'name',
+        'code',
+        'price',
+        'description',
+        'category_id',
+        'image',
+        'new',
+        'hit',
+        'recommend',
+        'count',
+        'name_en',
+        'description_en',
     ];
 
     public function category()

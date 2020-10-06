@@ -1,12 +1,12 @@
 @extends('layouts.master')
-@section('title', $category->name)
+@section('title', __('main.category') . $category->__('name'))
 
 @section('content')
     <h1>
-        {{ $category->name }} {{ $products->count() }}
+        {{ $category->__('name') }} {{ $products->count() }}
     </h1>
     <p>
-        {{ $category->description }}
+        {{ $category->__('description') }}
     </p>
     <form method="GET" action="{{ route('category', $category->code) }}">
         <div class="filters row">

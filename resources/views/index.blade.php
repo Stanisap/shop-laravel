@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Главная')
+@section('title', __('main.all_products'))
 
 @section('content')
     <h1>@lang('main.all_products')</h1>

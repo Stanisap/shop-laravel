@@ -36,13 +36,20 @@
                 <td>{{ $product->description }}</td>
             </tr>
             <tr>
+                <td>Название en</td>
+                <td>{{ $product->name_en }}</td>
+            </tr>
+            <tr>
+                <td>Описание en</td>
+                <td>{{ $product->description_en }}</td>
+            </tr>
+            <tr>
                 <td>Цена</td>
                 <td>{{ $product->price }}</td>
             </tr>
             <tr>
                 <td>Картинка</td>
-                <td><img src="{{ Storage::url($product->image) }}"
-                         height="240px"></td>
+                <td><img src="{{ Storage::url($product->image) }}" height="60px"></td>
             </tr>
             <tr>
                 <td>Кол-во товаров</td>
