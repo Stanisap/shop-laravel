@@ -43,6 +43,7 @@
                                value="@isset($product){{ $product->name }}@endisset">
                     </div>
                 </div>
+                <br>
                 <div class="input-group row">
                     <label for="name_en" class="col-sm-2 col-form-label">Название en: </label>
                     <div class="col-sm-6">

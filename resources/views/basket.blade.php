@@ -40,13 +40,13 @@
                             </form>
                         </div>
                     </td>
-                    <td>{{ $product->price }} руб.</td>
-                    <td>{{ $product->getPriceForCount() }} руб.</td>
+                    <td>{{ $product->price }} {{App\Services\CurrencyConversion::getCurrencySymbol()}}</td>
+                    <td>{{ $product->getPriceForCount() }} {{App\Services\CurrencyConversion::getCurrencySymbol()}}</td>
                 </tr>
             @endforeach
             <tr>
                 <td colspan="3">@lang('basket.subtotal'):</td>
-                <td>{{ $order->calculateFullSum() }} руб.</td>
+                <td>{{ $order->calculateFullSum() }} {{App\Services\CurrencyConversion::getCurrencySymbol()}}</td>
             </tr>
             </tbody>
         </table>

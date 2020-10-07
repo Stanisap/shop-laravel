@@ -1,5 +1,5 @@
 <p>Привет {{ $name }}</p>
-<p>Ваш заказ на сумму {{ $fullSum }} принят</p>
+<p>Ваш заказ на сумму {{ $fullSum }} {{App\Services\CurrencyConversion::getCurrencySymbol()}} принят</p>
 <table class="table table-striped">
     <thead>
     <tr>
@@ -21,13 +21,13 @@
             <td><span class="badge">{{ $product->pivot->count }}</span>
 
             </td>
-            <td>{{ $product->price }} руб.</td>
-            <td>{{ $product->getPriceForCount() }} руб.</td>
+            <td>{{ $product->price }} {{App\Services\CurrencyConversion::getCurrencySymbol()}}</td>
+            <td>{{ $product->getPriceForCount() }} {{App\Services\CurrencyConversion::getCurrencySymbol()}}</td>
         </tr>
     @endforeach
     <tr>
         <td colspan="3">Общая стоимость:</td>
-        <td>{{ $order->calculateFullSum() }} руб.</td>
+        <td>{{ $order->calculateFullSum() }} {{App\Services\CurrencyConversion::getCurrencySymbol()}}</td>
     </tr>
     </tbody>
 </table>
