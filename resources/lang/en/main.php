@@ -33,4 +33,5 @@ return [
     'm_subscribe' => 'Thanks! We will contact you upon admission ',
     'm_reset' => 'Your project has been dropped to the initial settings!',
     'm_is_admin' => 'You do not have administrator rights!',
+    'important' => 'This site is made for educational purposes only!',
 ];

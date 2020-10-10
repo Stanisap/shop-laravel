@@ -7,9 +7,12 @@ namespace App\Services;
 use App\Models\Currency;
 use Carbon\Carbon;
 use Carbon\Exceptions\Exception;
+use phpDocumentor\Reflection\Types\Self_;
 
 class CurrencyConversion
 {
+    public const DEFAULT_CURRENCY_CODE = 'RUB';
+    
     protected static $container;
 
     public static function loadContainer()
@@ -28,20 +31,40 @@ class CurrencyConversion
         return self::$container;
     }
 
-    public static function convert($sum, $originCurrencyCode = 'RUB', $targetCurrencyCode = null)
+    public static function getCurrencyCodeFromSession()
+    {
+        return session('currency', self::DEFAULT_CURRENCY_CODE);
+    }
+
+    public static function getCurrentCurrencyFromSession()
+    {
+        self::loadContainer();
+
+        $currentCurrencyCode = self::getCurrencyCodeFromSession();
+
+        foreach (self::$container as $currency) {
+            if ($currency->code === $currentCurrencyCode) {
+                return $currency;
+            }
+        }
+    }
+
+    public static function convert($sum, $originCurrencyCode = self::DEFAULT_CURRENCY_CODE, $targetCurrencyCode = null)
     {
         self::loadContainer();
 
         $originCurrency = self::$container[$originCurrencyCode];
 
-        if ($originCurrency->rate == 0 || $originCurrency->updated_at->startOfDay() != Carbon::now()->startOfDay()) {
-            CurrencyRates::getRates();
-            self::loadContainer();
-            $originCurrency = self::$container[$originCurrencyCode];
+        if ($originCurrencyCode != self::DEFAULT_CURRENCY_CODE) {
+            if ($originCurrency->rate == 0 || $originCurrency->updated_at->startOfDay() != Carbon::now()->startOfDay()) {
+                CurrencyRates::getRates();
+                self::loadContainer();
+                $originCurrency = self::$container[$originCurrencyCode];
+            }
         }
 
         if (is_null($targetCurrencyCode)) {
-            $targetCurrencyCode = session('currency', 'RUB');
+            $targetCurrencyCode = self::getCurrencyCodeFromSession();
         }
         $targetCurrency = self::$container[$targetCurrencyCode];
         if ($targetCurrency->rate == 0 || $targetCurrency->updated_at->startOfDay() != Carbon::now()->startOfDay()) {
@@ -56,7 +79,7 @@ class CurrencyConversion
     public static function getCurrencySymbol()
     {
         self::loadContainer();
-        $symbolFromSession = session('currency', 'RUB');
+        $symbolFromSession = self::getCurrencyCodeFromSession();
         $currency = self::$container[$symbolFromSession];
         return $currency->symbol;
     }

@@ -24,10 +24,9 @@ class ResetController extends Controller
                 Storage::put($file, Storage::disk('reset')->get($file));
             }
         }
-        $orderId = session('orderId');
-        if (!is_null($orderId)) {
-            session()->forget('orderId');
-            session()->forget('full_order_sum');
+        $order = session('order');
+        if (!is_null($order)) {
+            session()->forget('order');
         }
         session()->flash('success', __('main.m_reset'));
 

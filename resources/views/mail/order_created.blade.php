@@ -18,16 +18,12 @@
                     {{ $product->__('name') }}
                 </a>
             </td>
-            <td><span class="badge">{{ $product->pivot->count }}</span>
+            <td><span class="badge">{{ $product->countInOrder }}</span>
 
             </td>
             <td>{{ $product->price }} {{App\Services\CurrencyConversion::getCurrencySymbol()}}</td>
-            <td>{{ $product->getPriceForCount() }} {{App\Services\CurrencyConversion::getCurrencySymbol()}}</td>
+            <td>{{ $product->price * $product->countInOrder }} {{App\Services\CurrencyConversion::getCurrencySymbol()}}</td>
         </tr>
     @endforeach
-    <tr>
-        <td colspan="3">Общая стоимость:</td>
-        <td>{{ $order->calculateFullSum() }} {{App\Services\CurrencyConversion::getCurrencySymbol()}}</td>
-    </tr>
     </tbody>
 </table>

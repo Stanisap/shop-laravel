@@ -46,12 +46,12 @@ class BasketController extends Controller
         } else {
             session()->flash('warning', __('basket.messages.not_available'));
         }
-        Order::eraseOrderSum();
         return redirect()->route('index');
     }
 
     public function basketAdd(Product $product)
     {
+
         $result = (new Basket(true))->addProduct($product);
 
         if ($result) {

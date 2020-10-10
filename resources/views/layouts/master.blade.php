@@ -70,6 +70,53 @@
         @yield('content')
     </div>
 </div>
+</div>
+<!-- Footer -->
+<footer class="page-footer footer-inverse blue pt-4">
+
+    <!-- Footer Links -->
+    <div class="container-fluid text-center text-md-left">
+
+        <!-- Grid row -->
+        <div class="row">
+
+            <!-- Grid column -->
+            <div class="col-md-9">
+                <!-- Content -->
+                <p class="h3 text-danger pl-3">@lang('main.important')</p>
+
+            </div>
+
+            <!-- Grid column -->
+            <div class="col-md-3 mb-md-0 mb-3">
+                <!-- Links -->
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="{{ route('index') }}">@lang('main.online_shop')</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('categories') }}">@lang('main.all_categories')</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('basket') }}">@lang('basket.cart')</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- Grid column -->
+        </div>
+        <!-- Grid row -->
+
+    </div>
+    <!-- Footer Links -->
+
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">© 2020 Copyright:
+        <a href="https://github.com/Stanisap"> GitHub/Stanisap</a>
+    </div>
+    <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
 </body>
 </html>
 
