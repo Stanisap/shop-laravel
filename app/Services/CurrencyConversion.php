@@ -67,12 +67,10 @@ class CurrencyConversion
             $targetCurrencyCode = self::getCurrencyCodeFromSession();
         }
         $targetCurrency = self::$container[$targetCurrencyCode];
-        if ($originCurrencyCode != self::DEFAULT_CURRENCY_CODE) {
-            if ($targetCurrency->rate == 0 || $targetCurrency->updated_at->startOfDay() != Carbon::now()->startOfDay()) {
-                CurrencyRates::getRates();
-                self::loadContainer();
-                $targetCurrency = self::$container[$targetCurrencyCode];
-            }
+        if ($targetCurrency->rate == 0 || $targetCurrency->updated_at->startOfDay() != Carbon::now()->startOfDay()) {
+            CurrencyRates::getRates();
+            self::loadContainer();
+            $targetCurrency = self::$container[$targetCurrencyCode];
         }
 
         return $sum / $originCurrency->rate * $targetCurrency->rate;
