@@ -6,7 +6,7 @@
     <h1>@lang('order.confirm'):</h1>
     <div class="container">
         <div class="row justify-content-center">
-            <p>@lang('order.total') <b>{{ $order->getFullSum() }} {{App\Services\CurrencyConversion::getCurrencySymbol()}}</b></p>
+            <p>@lang('order.total') <b>{{ $order->getFullSum() }} {{$currencySymbol}}</b></p>
             <form action="{{ route('order-confirm') }}" method="POST">
                 <div>
                     <p>@lang('order.manager_can_contact')</p>

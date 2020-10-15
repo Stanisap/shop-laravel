@@ -27,15 +27,15 @@
                 </li>
                 <li @routeactive('basket*')><a href="{{ route('basket') }}">@lang('main.cart')</a></li>
                 @admin
-                    <li><a href="{{ route('reset') }}">@lang('main.rest')</a></li>
+                <li><a href="{{ route('reset') }}">@lang('main.rest')</a></li>
                 @endadmin
                 <li><a href="{{ route('locale', __('main.set_lang')) }}">@lang('main.set_lang')</a></li>
 
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">{{ App\Services\CurrencyConversion::getCurrencySymbol() }}<span class="caret"></span></a>
+                       aria-expanded="false">{{ $currencySymbol }}<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        @foreach(App\Services\CurrencyConversion::getCurrencies() as $currency)
+                        @foreach($currencies as $currency)
                             <li><a href="{{ route('currency', $currency->code) }}">{{ $currency->symbol }}</a></li>
                         @endforeach
                     </ul>
@@ -49,9 +49,9 @@
                 @endguest
                 @auth
                     @admin
-                        <li><a href="{{ route('home') }}">@lang('main.admin_panel')</a></li>
-                    @else
-                        <li><a href="{{ route('person.orders.index') }}">@lang('main.orders')</a></li>
+                    <li><a href="{{ route('home') }}">@lang('main.admin_panel')</a></li>
+                @else
+                    <li><a href="{{ route('person.orders.index') }}">@lang('main.orders')</a></li>
                     @endadmin
                     <li><a href="{{ route('get-logout') }}">@lang('main.sign_out')</a></li>
                 @endauth
@@ -81,25 +81,32 @@
         <div class="row">
 
             <!-- Grid column -->
-            <div class="col-md-9">
+            <div class="col-md-6">
                 <!-- Content -->
                 <p class="h3 text-danger pl-3">@lang('main.important')</p>
 
             </div>
 
             <!-- Grid column -->
-            <div class="col-md-3 mb-md-0 mb-3">
+            <div class="col-md-3">
                 <!-- Links -->
                 <ul class="list-unstyled">
+                    @foreach($categories as $category)
+                        <li>
+                            <a href="{{ route('category', $category->code) }}">{{ $category->__('name') }}</a>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+
+            <div class="col-md-3">
+                <!-- Links -->
+                <ul class="list-unstyled">
+                    @foreach($bestProducts as $bestProduct)
                     <li>
-                        <a href="{{ route('index') }}">@lang('main.online_shop')</a>
+                        <a href="{{ route('product', [$bestProduct->category->code, $bestProduct->code]) }}">{{ $bestProduct->__('name') }}</a>
                     </li>
-                    <li>
-                        <a href="{{ route('categories') }}">@lang('main.all_categories')</a>
-                    </li>
-                    <li>
-                        <a href="{{ route('basket') }}">@lang('basket.cart')</a>
-                    </li>
+                    @endforeach
                 </ul>
             </div>
             <!-- Grid column -->
@@ -113,10 +120,7 @@
     <div class="footer-copyright text-center py-3">© 2020 Copyright:
         <a href="https://github.com/Stanisap"> GitHub/Stanisap</a>
     </div>
-    <!-- Copyright -->
-
 </footer>
-<!-- Footer -->
 </body>
 </html>
 

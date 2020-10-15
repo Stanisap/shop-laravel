@@ -55,9 +55,9 @@ class BasketController extends Controller
         $result = (new Basket(true))->addProduct($product);
 
         if ($result) {
-            session()->flash('success', $product->name . __('basket.messages.item_added'));
+            session()->flash('success', $product->__('name') . __('basket.messages.item_added'));
         } else {
-            session()->flash('warning', $product->name . __('basket.messages.this_not_available'));
+            session()->flash('warning', $product->__('name') . __('basket.messages.this_not_available'));
         }
 
         return redirect()->route('basket');
@@ -66,7 +66,7 @@ class BasketController extends Controller
     public function basketRemove(Product $product)
     {
         (new Basket())->removeProduct($product);
-        session()->flash('warning', $product->name . __('basket.messages.item_deleted'));
+        session()->flash('warning', $product->__('name') . __('basket.messages.item_deleted'));
         return redirect()->route('basket');
     }
 }

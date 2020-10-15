@@ -11,9 +11,9 @@ return [
     'messages' => [
         'not_available' => 'Товар не доступен в полном объеме',
         'confirmed_order' => 'Ваш заказ принят в обработку!',
-        'item_added' => ' добавлен',
+        'item_added' => ' добавлен(а)!',
         'this_not_available' => ' этот товар не доступен в большем кол-ве',
-        'item_deleted' => ' удален!',
+        'item_deleted' => ' удален(а)!',
         'basket_is_empty' => 'Ваша корзина путая!',
     ],
 ];

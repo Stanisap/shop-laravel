@@ -42,6 +42,7 @@ class MainController extends Controller
         }
 
         $products = $productQuery->paginate(6);
+
         return view('index', compact('products'));
     }
 
@@ -50,8 +51,7 @@ class MainController extends Controller
      */
     public function categories()
     {
-        $categories = Category::get();
-        return view('categories', compact('categories'));
+        return view('categories');
     }
 
     /**

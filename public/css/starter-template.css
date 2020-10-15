@@ -1,5 +1,16 @@
+html,
 body {
+    height: 100%;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
     padding-top: 40px;
+}
+
+div.container {
+    flex: 1 0 auto;
 }
 
 .starter-template {
@@ -53,7 +64,8 @@ div.filters {
 }
 
 footer {
-    padding: 10px;
+    flex: 0 0 auto;
+    padding: 35px;
     background-color: #222;
 }
 .footer-copyright {

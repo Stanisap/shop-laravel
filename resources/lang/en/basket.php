@@ -11,9 +11,9 @@ return [
     'messages' => [
         'not_available' => 'Product is not available in full',
         'confirmed_order' => 'Your order has been accepted for processing!',
-        'item_added' => 'The item added',
+        'item_added' => ' added',
         'this_not_available' => ' this product is not available in larger quantities!',
-        'item_deleted' => ' this item deleted!',
+        'item_deleted' => ' deleted!',
         'basket_is_empty' => 'Your cart is empty!',
     ],
 ];
