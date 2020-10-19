@@ -1,10 +1,17 @@
-1. Sku (Товарное предложение)
-    - Товар
-    - Колличество
-    - Свойство товара
-2. Property (Свойство) цвет, размер встроинной памяти
-3. Property option (Набор свойств) белый, церный; 32Гб. 64Гб
+1. Property (Свойство) цвет, размер встроинной памяти
+    - name
+    - name_en
 
-Relations (Связи)
-    - sku->property_option
-    - product->property
+2. Property option (Набор свойств) белый, церный; 32Гб. 64Гб
+    - property
+    - name
+    - name_en
+
+3. Sku (Товарное предложение)
+    - product
+    - count
+    - price
+    - property_option
+
+4. Product (property)
+

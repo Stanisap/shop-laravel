@@ -6,6 +6,9 @@ use App\Models\Traits\Translatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * @method static create(array $all)
+ */
 class PropertyOption extends Model
 {
     use SoftDeletes, Translatable;

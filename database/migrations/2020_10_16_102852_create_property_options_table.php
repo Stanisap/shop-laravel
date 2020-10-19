@@ -13,7 +13,7 @@ class CreatePropertyOptionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('property_options', function (Blueprint $table) {
+        Schema::create('property-options', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('property_id');
             $table->string('name');
@@ -30,6 +30,6 @@ class CreatePropertyOptionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('property_options');
+        Schema::dropIfExists('property-options');
     }
 }

@@ -33,6 +33,7 @@
                     @admin
                     <li><a href="{{ route('categories.index') }}">Категории</a></li>
                     <li><a href="{{ route('products.index') }}">Товары</a></li>
+                    <li><a href="{{ route('properties.index') }}">Свойства</a></li>
                     @endadmin
 
                     <li><a href="{{ route('home') }}">Заказы</a></li>
