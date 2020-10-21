@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="col-md-12">
-        <h1>Категория Бытовая техника</h1>
+        <h1>{{ $product->name }}</h1>
         <table class="table">
             <tbody>
             <tr>
@@ -43,18 +43,12 @@
                 <td>Описание en</td>
                 <td>{{ $product->description_en }}</td>
             </tr>
-            <tr>
-                <td>Цена</td>
-                <td>{{ $product->price }}</td>
-            </tr>
+
             <tr>
                 <td>Картинка</td>
                 <td><img src="{{ Storage::url($product->image) }}" height="60px"></td>
             </tr>
-            <tr>
-                <td>Кол-во товаров</td>
-                <td>10</td>
-            </tr>
+
             <tr>
                 <td>Лейблы</td>
                 <td>

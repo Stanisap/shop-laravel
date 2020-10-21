@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProductRequest extends FormRequest
+class SkuRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,19 +23,10 @@ class ProductRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = [
-            'code' => 'required|min:3|max:255|unique:products,code',
-            'name' => 'required|min:3|max:255',
-            'description' => 'required|min:3',
-//            'price' => 'required|numeric|min:2',
-//            'count' => 'required|numeric|min:0',
+        return [
+            'price' => 'required|numeric|min:2',
+            'count' => 'required|numeric|min:0',
         ];
-
-        if ($this->route()->named('products.update')) {
-            $rules['code'] .= ',' . $this->route()->parameter('product')->id;
-        }
-
-        return $rules;
     }
 
     /**
@@ -48,14 +39,9 @@ class ProductRequest extends FormRequest
         return [
             'required' => 'Поле :attribute должно быть заполненно',
             'min' => 'Поле :attribute должно иметь :min символов',
-            'code.min' => 'Поле "код" должно иметь :min символов',
-            'name.min' => 'Поле "название" должно иметь :min символов',
-            'description.min' => 'Поле "описание" должно иметь :min символов',
             'price.min' => 'Поле "описание" должно иметь :min символов',
             'price.numeric' => 'В это поле нужно вводить цыфры',
-            'unique' => 'Такой код уже существует. Поле должно быть уникальным',
             'count.numeric' => 'В этом поле нужно вводить цыфры',
-
         ];
     }
 }

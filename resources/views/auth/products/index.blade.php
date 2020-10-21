@@ -18,7 +18,7 @@
                     Название
                 </th>
                 <th>
-                    Кол.
+                    Кол товарных предложений
                 </th>
                 <th>
                     Товар
@@ -32,7 +32,7 @@
                     <td>{{ $product->id }}</td>
                     <td>{{ $product->code }}</td>
                     <td>{{ $product->name }}</td>
-                    <td>{{ $product->count }}</td>
+                    <td></td>
                     <td>
                         @isset($product->image)
                             <img src="{{ Storage::url($product->image) }}" width="50">
@@ -42,6 +42,7 @@
                         <div class="btn-group" role="group">
                             <form action="{{ route('products.destroy', $product) }}" method="POST">
                                 <a class="btn btn-success" type="button" href="{{ route('products.show', $product) }}">Открыть</a>
+                                <a class="btn btn-primary" type="button" href="{{ route('skus.index', $product) }}">Skus</a>
                                 <a class="btn btn-warning" type="button" href="{{ route('products.edit', $product) }}">Редактировать</a>
                                 @csrf
                                 @method('DELETE')

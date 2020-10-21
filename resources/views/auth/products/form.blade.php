@@ -90,29 +90,29 @@
                 </div>
                 <br>
                 <div class="input-group row">
-                    <label for="price" class="col-sm-2 col-form-label">Цена: </label>
-                    <div class="col-sm-6">
-                        @include('auth.layouts.error', ['fieldName' => 'price'])
-                        <input type="text" class="form-control" name="price" id="price"
-                               value="@isset($product){{ $product->price }}@endisset">
-                    </div>
-                </div>
-                <br>
-                <div class="input-group row">
-                    <label for="count" class="col-sm-2 col-form-label">Количество: </label>
-                    <div class="col-sm-6">
-                        @include('auth.layouts.error', ['fieldName' => 'count'])
-                        <input type="text" class="form-control" name="count" id="count"
-                               value="@isset($product){{ $product->count }}@endisset">
-                    </div>
-                </div>
-                <br>
-                <div class="input-group row">
                     <label for="image" class="col-sm-2 col-form-label">Картинка: </label>
                     <div class="col-sm-10">
                         <label class="btn btn-default btn-file">
                             Загрузить <input type="file" style="display: none;" name="image" id="image">
                         </label>
+                    </div>
+                </div>
+                <br>
+                <div class="input-group row">
+                    <label for="property_id" class="col-sm-2 col-form-label">Свойство: </label>
+                    <div class="col-sm-6">
+                        @include('auth.layouts.error', ['fieldName' => 'property_id[]'])
+                        <select name="property_id[]" multiple>
+                            @foreach($properties as $property)
+                                <option value="{{ $property->id }}"
+                                        @isset($product)
+                                            @if($product->properties->contains($property->id))
+                                            selected
+                                            @endif
+                                        @endisset
+                                >{{ $property->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
                 <br>

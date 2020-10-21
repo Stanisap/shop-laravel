@@ -23,7 +23,7 @@ class PropertyOptionController extends Controller
      */
     public function index(Property $property)
     {
-        $propertyOptions = PropertyOption::where('property_id', $property->id)->paginate(10);
+        $propertyOptions = $property->propertyOptions()->paginate(10);
         return view('auth.property-options.index', compact('property', 'propertyOptions'));
     }
 
@@ -41,11 +41,11 @@ class PropertyOptionController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param Property $property
      * @param PropertyOptionRequest $request
+     * @param Property $property
      * @return RedirectResponse
      */
-    public function store(Property $property, PropertyOptionRequest $request)
+    public function store(PropertyOptionRequest $request, Property $property)
     {
         $params = $request->all();
         $params['property_id'] = $property->id;
