@@ -68,6 +68,7 @@
             <p class="alert alert-warning">{{ session()->get('warning') }}</p>
         @endif
         @yield('content')
+
     </div>
 </div>
 </div>
@@ -101,10 +102,13 @@
 
             <div class="col-md-3">
                 <!-- Links -->
+                <h4 class="text-primary">@lang('main.popular_goods')</h4>
                 <ul class="list-unstyled">
-                    @foreach($bestProducts as $bestProduct)
+                    @foreach($bestSkus as $bestSku)
                     <li>
-                        <a href="{{ route('product', [$bestProduct->category->code, $bestProduct->code]) }}">{{ $bestProduct->__('name') }}</a>
+                        <a href="{{ route('sku', [$bestSku->product->category->code, $bestSku->product->code, $bestSku]) }}">
+                            {{ $bestSku->product->__('name') }}
+                        </a>
                     </li>
                     @endforeach
                 </ul>

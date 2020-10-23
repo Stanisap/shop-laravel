@@ -45,15 +45,6 @@ class Product extends Model
         return $this->belongsToMany(Property::class, 'property_product')->withTimestamps();
     }
 
-    public function getPriceForCount()
-    {
-        if (!is_null($this->pivot->count)) {
-            return $this->price * $this->pivot->count;
-        } else {
-            return $this->price;
-        }
-    }
-
     // Methods scopes
 
     public function scopeByCode($query, $code)
@@ -108,10 +99,7 @@ class Product extends Model
         return $this->recommend === 1;
     }
 
-    public function isAvailable()
-    {
-        return !$this->trashed() && $this->count > 0;
-    }
+
 
     public function getPriceAttribute($value)
     {

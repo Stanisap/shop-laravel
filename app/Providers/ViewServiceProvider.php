@@ -25,6 +25,7 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
         View::composer(['layouts.master', 'categories'], 'App\ViewComposers\CategoriesComposer');
         View::composer('layouts.master', 'App\ViewComposers\CurrenciesComposer');
         View::composer([
@@ -33,7 +34,7 @@ class ViewServiceProvider extends ServiceProvider
             'basket',
             'order',
             'product',
-            'mail.order-created',
+            'mail.order_created',
 
         ], function ($view) {
             $currencySymbol = CurrencyConversion::getCurrencySymbol();

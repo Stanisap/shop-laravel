@@ -16,6 +16,11 @@ class PropertyOption extends Model
     protected $fillable = ['property_id', 'name', 'name_en'];
 
     //    Relations
+    public function property()
+    {
+        return $this->belongsTo(Property::class);
+    }
+
     // TODO: check table name and fields
     public function skus()
     {

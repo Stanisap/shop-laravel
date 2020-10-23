@@ -3,6 +3,7 @@
 @section('title', __('main.all_products'))
 
 @section('content')
+
     <h1>@lang('main.all_products')</h1>
     <form method="GET" action="{{ route('index') }}">
         <div class="filters row">
@@ -36,9 +37,10 @@
         </div>
     </form>
     <div class="row">
-        @foreach($products as $product)
-            @include('layouts.card', compact('product'))
-        @endforeach
-        {{ $products->withQueryString()->links() }}
-@endsection
 
+        @foreach($skus as $sku)
+             @include('layouts.card', compact('sku'))
+        @endforeach
+
+    {{ $skus->withQueryString()->links() }}
+@endsection

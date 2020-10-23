@@ -6,15 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @method static findOrFail(\Illuminate\Contracts\Foundation\Application|\Illuminate\Session\SessionManager|\Illuminate\Session\Store $orderId)
- * @property Product products
+ * @property Sku skus
  */
 class Order extends Model
 {
+
     protected $fillable = ['user_id', 'currency_id', 'sum'];
 
-    public function products()
+    public function skus()
     {
-        return $this->belongsToMany(Product::class)->withPivot('count', 'price')->withTimestamps();
+        return $this->belongsToMany(Sku::class)->withPivot('count', 'price')->withTimestamps();
     }
 
     public function currency()
@@ -25,8 +26,8 @@ class Order extends Model
     public function calculateFullSum()
     {
         $sum = 0;
-        foreach ($this->products()->withTrashed()->get() as $product) {
-            $sum += $product->getPriceForCount();
+        foreach ($this->skus()->withTrashed()->get() as $sku) {
+            $sum += $sku->getPriceForCount();
         }
         return $sum;
     }
@@ -34,8 +35,8 @@ class Order extends Model
     public function getFullSum()
     {
        $sum = 0;
-        foreach ($this->products as $product) {
-            $sum += $product->price *$product->countInOrder;
+        foreach ($this->skus as $sku) {
+            $sum += $sku->price * $sku->countInOrder;
         }
        return $sum;
     }
@@ -46,14 +47,14 @@ class Order extends Model
         $this->phone = $phone;
         $this->status = 1;
         $this->sum = $this->getFullSum();
-        $products = $this->products;
+        $skus = $this->skus;
 
         $this->save();
 
-        foreach ($products as $productInOrder) {
-            $this->products()->attach($productInOrder, [
-                'count' => $productInOrder->countInOrder,
-                'price' => $productInOrder->price,
+        foreach ($skus as $skuInOrder) {
+            $this->skus()->attach($skuInOrder, [
+                'count' => $skuInOrder->countInOrder,
+                'price' => $skuInOrder->price,
             ]);
         }
         session()->forget('order');

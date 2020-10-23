@@ -3,7 +3,7 @@
 
 @section('content')
     <h1>
-        {{ $category->__('name') }} {{ $products->count() }}
+        {{ $category->__('name') }}
     </h1>
     <p>
         {{ $category->__('description') }}
@@ -40,9 +40,9 @@
         </div>
     </form>
     <div class="row">
-        @foreach($products as $product)
-            @include('layouts.card', compact('product'))
+        @foreach($category->products->map->skus->flatten() as $sku)
+            @include('layouts.card', compact('sku'))
         @endforeach
     </div>
-    {{ $products->withQueryString()->links() }}
+{{--    {{ $products->withQueryString()->links() }}--}}
 @endsection

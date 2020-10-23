@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Classes\Basket;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\Sku;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
@@ -49,24 +50,24 @@ class BasketController extends Controller
         return redirect()->route('index');
     }
 
-    public function basketAdd(Product $product)
+    public function basketAdd(Sku $sku)
     {
 
-        $result = (new Basket(true))->addProduct($product);
+        $result = (new Basket(true))->addSku($sku);
 
         if ($result) {
-            session()->flash('success', $product->__('name') . __('basket.messages.item_added'));
+            session()->flash('success', $sku->product->__('name') . __('basket.messages.item_added'));
         } else {
-            session()->flash('warning', $product->__('name') . __('basket.messages.this_not_available'));
+            session()->flash('warning', $sku->product->__('name') . __('basket.messages.this_not_available'));
         }
 
         return redirect()->route('basket');
     }
 
-    public function basketRemove(Product $product)
+    public function basketRemove(Sku $sku)
     {
-        (new Basket())->removeProduct($product);
-        session()->flash('warning', $product->__('name') . __('basket.messages.item_deleted'));
+        (new Basket())->removeSku($sku);
+        session()->flash('warning', $sku->product->__('name') . __('basket.messages.item_deleted'));
         return redirect()->route('basket');
     }
 }

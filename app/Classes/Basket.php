@@ -6,7 +6,7 @@ namespace App\Classes;
 
 use App\Mail\OrderCreated;
 use App\Models\Order;
-use App\Models\Product;
+use App\Models\Sku;
 use App\Services\CurrencyConversion;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -47,19 +47,19 @@ class Basket
 
     public function countAvailable($updateCount = false)
     {
-        $products = collect([]);
-        foreach ($this->order->products as $productOrder) {
-            $product = Product::find($productOrder->id);
-            if ($productOrder->countInOrder > $product->count) {
+        $skus = collect([]);
+        foreach ($this->order->skus as $skuOrder) {
+            $sku = Sku::find($skuOrder->id);
+            if ($skuOrder->countInOrder > $sku->count) {
                 return false;
             }
             if ($updateCount) {
-                $product->count -= $productOrder->countInOrder;
-                $products->push($product);
+                $sku->count -= $skuOrder->countInOrder;
+                $skus->push($sku);
             }
         }
         if ($updateCount) {
-            $products->map->save();
+            $skus->map->save();
         }
         return true;
     }
@@ -75,32 +75,32 @@ class Basket
         return $result;
     }
 
-    public function removeProduct(Product $product)
+    public function removeSku(Sku $sku)
     {
-        if ($this->order->products->contains($product)) {
-            $productInOrder = $this->order->products->where('id', $product->id)->first();
-            if ($productInOrder->countInOrder < 2) {
-                $this->order->products->pop($product);;
+        if ($this->order->skus->contains($sku)) {
+            $skuInOrder = $this->order->skus->where('id', $sku->id)->first();
+            if ($skuInOrder->countInOrder < 2) {
+                $this->order->skus->pop($sku);;
             } else {
-                $productInOrder->countInOrder--;
+                $skuInOrder->countInOrder--;
             }
         }
     }
 
-    public function addProduct(Product $product)
+    public function addSku(Sku $sku)
     {
-        if ($this->order->products->contains($product)) {
-            $productInOrder = $this->order->products->where('id', $product->id)->first();
-            if ($productInOrder->countInOrder >= $product->count) {
+        if ($this->order->skus->contains($sku)) {
+            $skuInOrder = $this->order->skus->where('id', $sku->id)->first();
+            if ($skuInOrder->countInOrder >= $sku->count) {
                 return false;
             }
-            $productInOrder->countInOrder++;
+            $skuInOrder->countInOrder++;
         } else {
-            if ($product->count == 0) {
+            if ($sku->count == 0) {
                 return false;
             }
-            $product->countInOrder = 1;
-            $this->order->products->push($product);
+            $sku->countInOrder = 1;
+            $this->order->skus->push($sku);
         }
         return true;
     }

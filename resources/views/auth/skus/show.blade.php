@@ -31,16 +31,16 @@
                 <td>Количество</td>
                 <td>{{ $sku->count }}</td>
             </tr>
-            @foreach($product->properties as $property)
-                @foreach($property->propertyOptions as $propertyOption)
-                    @if($sku->propertyOptions->contains($propertyOption->id))
-                        <tr>
-                            <td>{{ $property->name }}</td>
-                            <td>{{ $propertyOption->name }}</td>
-                        </tr>
-                    @endif
+            @isset($sku->product->properties)
+                @foreach($sku->propertyOptions as $propertyOption)
+
+                    <tr>
+                        <td>{{ $propertyOption->property->name }}</td>
+                        <td>{{ $propertyOption->name }}</td>
+                    </tr>
+
                 @endforeach
-            @endforeach
+            @endisset
             </tbody>
         </table>
     </div>

@@ -34,4 +34,5 @@ return [
     'm_reset' => 'Your project has been dropped to the initial settings!',
     'm_is_admin' => 'You do not have administrator rights!',
     'important' => 'This site is made for educational purposes only!',
+    'popular_goods' => 'Popular goods',
 ];
