@@ -44,7 +44,6 @@ class MainController extends Controller
             }
         }
         $skus = $skusQuery->paginate(6);
-//        $products = $productQuery->paginate(6);
         return view('index', compact('skus'));
     }
 

@@ -24,6 +24,7 @@ class PropertyOptionController extends Controller
     public function index(Property $property)
     {
         $propertyOptions = $property->propertyOptions()->paginate(10);
+
         return view('auth.property-options.index', compact('property', 'propertyOptions'));
     }
 

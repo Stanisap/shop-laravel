@@ -51,6 +51,7 @@ class CurrencyConversion
 
     public static function convert($sum, $originCurrencyCode = self::DEFAULT_CURRENCY_CODE, $targetCurrencyCode = null)
     {
+        dd(1);
         self::loadContainer();
 
         $originCurrency = self::$container[$originCurrencyCode];
